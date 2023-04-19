@@ -14,7 +14,7 @@ env:
   
 jobs:
   terraform:
-    name: "Terraform-Test"
+    name: "Plan/Apply"
     runs-on: ubuntu-latest
     environment: Development
     permissions:
