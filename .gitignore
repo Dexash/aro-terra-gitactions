@@ -5,6 +5,10 @@
 *.tfstate
 *.tfstate.*
 
+# Secrets
+pull-secret*
+variables_secrets*
+
 # Crash log files
 crash.log
 
