@@ -58,8 +58,8 @@ resource "azurerm_virtual_network" "virtual_network" {
 resource "azurerm_subnet" "master_subnet" {
   name                                          = var.master_subnet_name
   resource_group_name                           = var.resource_group_name
+    #checkov:skip=CKV2_AZURE_31:Ensure VNET subnet is configured with a Network Security Group (NSG)
   virtual_network_name                          = azurerm_virtual_network.virtual_network.name
-  checkov:skip=CKV2_AZURE_31:Ensure VNET subnet is configured with a Network Security Group (NSG)
   address_prefixes                              = var.master_subnet_address_space
   private_link_service_network_policies_enabled = false
   service_endpoints                             = ["Microsoft.ContainerRegistry"]
@@ -68,7 +68,7 @@ resource "azurerm_subnet" "master_subnet" {
 resource "azurerm_subnet" "worker_subnet" {
   name                 = var.worker_subnet_name
   resource_group_name  = var.resource_group_name
-  checkov:skip=CKV2_AZURE_31:Ensure VNET subnet is configured with a Network Security Group (NSG)
+      #checkov:skip=CKV2_AZURE_31:Ensure VNET subnet is configured with a Network Security Group (NSG)
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   address_prefixes     = var.worker_subnet_address_space
   service_endpoints    = ["Microsoft.ContainerRegistry"]
