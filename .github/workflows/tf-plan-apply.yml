@@ -59,8 +59,8 @@ jobs:
       run: |
         export exitcode=0
         # terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
-        terraform plan -detailed-exitcode  -var-file=Development/dev.tfvars -no-color -input=false || export exitcode=$?
-       
+        #terraform plan -detailed-exitcode  -var-file=Development/dev.tfvars -no-color -input=false || export exitcode=$?
+        terraform plan -detailed-exitcode  -var-file=Development/dev.tfvars -no-color -input=false -out tfplan|| export exitcode=$?
 
 
         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
