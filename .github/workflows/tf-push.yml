@@ -1,4 +1,4 @@
-name: "Terraform-pull-request"
+name: "Terraform-Push"
 
 on:
   push:
