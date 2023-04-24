@@ -1,11 +1,11 @@
-name: 'Terraform Unit Tests'
+name: 'Terraform-UnitTests'
 
 on:
   push:
 
 jobs:
   terraform-unit-tests:
-    name: 'Terraform Unit Tests'
+    name: 'Terraform-UnitTests'
     runs-on: ubuntu-latest
     permissions: write-all
     
