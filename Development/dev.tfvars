@@ -2,7 +2,7 @@
 
 /* terraform variables setting */
 
-domain                        = "xxyyzz"
+domain                        = "xyz"
 location                      = "canadacentral"
 resource_group_name           = "aro-openshit-dev-cac-001-RG"
 resource_prefix               = "aro-openshit-dev-cac-001"
