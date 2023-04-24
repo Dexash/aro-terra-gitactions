@@ -13,8 +13,8 @@ env:
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
   
 jobs:
-  Terraform-pull-request:
-    name: "Terraform-Test"
+  Terraform-Push:
+    name: "Terraform-Push"
     runs-on: ubuntu-latest
     environment: Development
     permissions:
