@@ -1,4 +1,4 @@
-name: 'Terraform-UnitTest'
+name: 'Terraform-UnitTests'
 
 on:
   push:
