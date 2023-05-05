@@ -34,10 +34,11 @@ To enhance the readability of this blog post, references to both the command-lin
 
 # Steps:
 
-Install Azure CLI
-Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
+- Install Azure CLI
 
-# Increase limits by VM series
+xAzure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
+
+- Increase limits by VM series
 
 Increasing limits by VM series for ARO installation is necessary to ensure that your ARO cluster has the resources it needs to operate efficiently and reliably. 
 Standard DSv3 Family vCPUs = 150  
