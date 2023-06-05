@@ -5,22 +5,45 @@
 Deploying Azure RedHat Openshift with Terraform and Integrating with GitHub Actions
 Terraforming  Azure Red Hat OpenShift(ARO) with GitHub Actions
 
-# Introduction
+## Introduction
 
-By combining Infrastructure as Code with Continuous Integration and Continuous Delivery and/or Deployment  CI/CD  in cloud platforms, organizations can achieve a highly automated and streamlined software development and delivery process. Developers can use code to define and provision infrastructure resources, and use CI/CD to continuously integrate code changes and test the software. This approach can help organizations to achieve faster and more reliable software delivery, as well as improve the overall quality of their software.
+By combining Infrastructure as Code with Continuous Integration and Continuous Delivery and/or Deployment  [CI/CD](https://www.redhat.com/en/topics/devops/what-is-ci-cd) in cloud platforms, organizations can achieve a highly automated and streamlined software development and delivery process. Developers can use code to define and provision infrastructure resources, and use CI/CD to continuously integrate code changes and test the software. This approach can help organizations to achieve faster and more reliable software delivery, as well as improve the overall quality of their software.
 
-# What will be covered
+## What will be covered
 
-Many organizations use GitHub Actions and Terraform to deploy solutions in Azure as best practices to achieve collaboration, automation and scalability and security
+Many organizations use [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions) and [Terraform](https://developer.hashicorp.com/terraform/intro) to deploy solutions in [Azure](https://azure.microsoft.com/en-ca/resources/cloud-computing-dictionary/what-is-azure/) as best practices to achieve collaboration, automation and scalability and security
 
 In this blog post, we are going to learn how to deploy Azure Red Hat OpenShift (ARO) with Terraform and integrate it with Terraform Cloud and GitHub Actions.
 
 
-If you want to learn about ARO you can get more information here.
+If you want to learn about ARO you can get more information [here](https://www.redhat.com/en/technologies/cloud-computing/openshift/azure).
 
-Note: Azure-Samples/aro-azapi-terraform has been used for Terraform code as referenced in this post. 
+**Note** : [Azure-Samples/aro-azapi-terraform](https://github.com/Azure-Samples/aro-azapi-terraform) has been used for Terraform code as referenced in this post. 
 
-# Prerequisites:
+![Terraforming Aro](docs/assets/Dataflow.png)
+
+## Dataflow
+
+1. Create a new branch from the main and modify the code. As an example changing the work node instance type or subnet address.
+2. Create a pull request(PR) to the new branch
+3. GitHub Actions workflow will be triggered to guarantee that your code is correctly formatted, consistent internally, and results in a secure infrastructure.
+4. Create PR to merge into the main branch
+5. GitHub Actions workflow will be triggered to run a terraform plan. The result of Terraform plan will be accessible in both GitHub Actions and Terraform cloud workspace. 
+6. After reviewing PR by the team and merging to the main branch, Terraform apply will execute.
+7. Terraform will deploy Red Hat OpenShift to Azure 
+
+## Workflow
+
+For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
+
+By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
+
+The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
+
+After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
+
+
+## Prerequisites:
 
 - Azure Account with active subscription
 
@@ -38,7 +61,7 @@ To enhance the readability of this blog post, references to both the command-lin
 
 - Install Azure CLI
 
-xAzure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
+Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
 
 - Increase limits by VM series
 
