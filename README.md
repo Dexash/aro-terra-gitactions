@@ -42,6 +42,13 @@ The infrastructure team should create a new branch from main and apply changes t
 
 After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
 
+We will use two workflows:
+
+- **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
+
+- **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
+Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
+After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
 
 ## Prerequisites:
 
@@ -59,29 +66,108 @@ To enhance the readability of this blog post, references to both the command-lin
 
 ## Steps:
 
-- **[Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)**
+1- **[Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)**
 
 Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
 
-- **[Increase limits by VM series](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)**
+2- **[Increase limits by VM series](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)**
 
 Increasing limits by VM series for ARO installation is necessary to ensure that your ARO cluster has the resources it needs to operate efficiently and reliably. 
+
 [Standard DSv3 Family vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 150  
 [Total Regional vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 200
 
-- **[Get a Red Hat pull secret](https://learn.microsoft.com/en-us/azure/openshift/tutorial-create-cluster#get-a-red-hat-pull-secret-optional)**
+3- **[Get a Red Hat pull secret](https://learn.microsoft.com/en-us/azure/openshift/tutorial-create-cluster#get-a-red-hat-pull-secret-optional)**
 
 [Navigate to your Red Hat OpenShift cluster manager portal](https://console.redhat.com/openshift/install/azure/aro-provisioned) and sign-in. Download the pull secret. We are going to use this secret in the Terraform Cloud while provisioning the ARO cluster. 
 
-- **Fork and Clone Github repository** 
+4- **Fork and Clone Github repository** 
 
 Fork the following repository in your GitHub account  and clone it in your local workstation.
 https://github.com/DexHat/aro-terra-gitactions
 
 After cloning in the local workstation update your .gitignore with following information.updated .gitignore file is part of repository.
 
-- **Secrets**
+**Secrets**
 
 pull-secret*
 variables_secrets*
 
+5- **Run create.sh script**
+
+Run  create.sh file with following command:
+
+ `sh create.sh`
+
+create.sh file will:
+
+- Create  variables-secrets file
+- Register necessary service providers
+- Create service principal and assign contribute and system administrator role to it
+- Generate variables for Terraform Cloud, GitHub Actions and tfvars.
+
+6- **Terraform Cloud Sign-up** 
+To integrate between Terraform and GitHub Actions, we are going to use [Terraform Cloud](https://www.terraform.io/) 
+
+- [Signup](https://app.terraform.io/session) for terraform cloud new account 
+- Choose an organization or [create an organization](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/organizations#creating-organizations) 
+- [Create a new workspace](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/creating#create-a-workspace) and select [API-driven](https://developer.hashicorp.com/terraform/cloud-docs/run/api) as a workflow type
+
+7- **Copy and set variables and secrets**
+
+Copy the following variables and secrets from the variables_secrets file and set them in Terraform Cloud workspace level:
+
+**Terraform Variables:**
+
+- aro_cluster_aad_sp_client_id = Service Principal Application (client) ID
+- aro_cluster_aad_sp_client_secret =  Service Principal Secret Value
+- aro_cluster_aad_sp_object_id = Service Principal Object ID
+- aro_rp_aad_sp_object_id = Azure Red Hat OpenShift Resource Provider Object ID
+- pull_secret = xxxxx
+
+
+**Environment Variables:**
+
+- ARM_CLIENT_ID =  Service Principal Application (client) ID
+- ARM_CLIENT_SECRET = Service Principal Secret Value
+- ARM_SUBSCRIPTION_ID = Azure Subscription ID
+- ARM_TENANT_ID = Azure Tenant ID 
+
+
+For more information about sensitive variables in Terraform, please check [Protect Sensitive Input Variables](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables).
+Since we are going to use Terraform Cloud, we will set all variables at the workspace level.
+ choose Organization => select Workspace => Variables
+
+8- **Install Terraform CLI**
+
+Terraform CLI is a powerful tool for managing infrastructure as code, allowing users to version control infrastructure changes, collaborate more effectively, and automate the deployment and management of infrastructure resources. Install Terraform CLI from [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform).
+
+- **Integrating Terraform Cloud and GitHub Actions**
+After installing Terraform CLI locally, run `terraform login` to create a token.
+
+Generated token will be used to integrate with GitHub Actions as CI/CD pipeline.
+Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN secret and copy value from previous step to here. 
+
+- In GitHub under Environments, create Development environment
+- Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
+
+
+- ARM_CLIENT_ID =  Service Principal Application (client) ID
+- ARM_CLIENT_SECRET = Service Principal Secret Value
+- ARM_SUBSCRIPTION_ID = Azure Subscription ID
+- ARM_TENANT_ID = Azure Tenant ID 
+
+- In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
+
+domain
+location
+resource_group_name
+resource_prefix
+virtual_network_address_space
+master_subnet_address_space
+worker_subnet_address_space
+
+
+## Conclusion 
+
+In conclusion, the use of GitHub Actions and Terraform Cloud together can provide a powerful solution for deploying and managing Azure Red Hat OpenShift (ARO) clusters. GitHub Actions provides a way to automate and streamline the process of managing code changes and deployments, while Terraform Cloud provides a way to manage infrastructure as code in a scalable and efficient manner. Azure, as a cloud provider, offers a robust platform for hosting and managing ARO clusters. By leveraging these tools and services, organizations can deploy and manage ARO clusters more efficiently, with greater consistency and control, and with the ability to easily scale up or down as needed. 
