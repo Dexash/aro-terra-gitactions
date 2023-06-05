@@ -70,6 +70,8 @@ To enhance the readability of this blog post, references to both the command-lin
 
 Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
 
+![Terraforming Aro](docs/assets/Azure-CLI-installation.gif)
+
 2- **[Increase limits by VM series](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)**
 
 Increasing limits by VM series for ARO installation is necessary to ensure that your ARO cluster has the resources it needs to operate efficiently and reliably. 
@@ -77,9 +79,13 @@ Increasing limits by VM series for ARO installation is necessary to ensure that 
 [Standard DSv3 Family vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 150  
 [Total Regional vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 200
 
+![Terraforming Aro](docs/assets/VMsizeIncreasing.gif)
+
 3- **[Get a Red Hat pull secret](https://learn.microsoft.com/en-us/azure/openshift/tutorial-create-cluster#get-a-red-hat-pull-secret-optional)**
 
 [Navigate to your Red Hat OpenShift cluster manager portal](https://console.redhat.com/openshift/install/azure/aro-provisioned) and sign-in. Download the pull secret. We are going to use this secret in the Terraform Cloud while provisioning the ARO cluster. 
+
+![Terraforming Aro](docs/assets/RedHat-PullSecret.gif)
 
 4- **Fork and Clone Github repository** 
 
@@ -107,11 +113,17 @@ create.sh file will:
 - Generate variables for Terraform Cloud, GitHub Actions and tfvars.
 
 6- **Terraform Cloud Sign-up** 
+
 To integrate between Terraform and GitHub Actions, we are going to use [Terraform Cloud](https://www.terraform.io/) 
 
 - [Signup](https://app.terraform.io/session) for terraform cloud new account 
 - Choose an organization or [create an organization](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/organizations#creating-organizations) 
+
+![Terraforming Aro](docs/assets/Terraform-Sign-in.gif)
+
 - [Create a new workspace](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/creating#create-a-workspace) and select [API-driven](https://developer.hashicorp.com/terraform/cloud-docs/run/api) as a workflow type
+
+![Terraforming Aro](docs/assets/API-driven-workflow.gif)
 
 7- **Copy and set variables and secrets**
 
@@ -136,17 +148,24 @@ Copy the following variables and secrets from the variables_secrets file and set
 
 For more information about sensitive variables in Terraform, please check [Protect Sensitive Input Variables](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables).
 Since we are going to use Terraform Cloud, we will set all variables at the workspace level.
- choose Organization => select Workspace => Variables
+
+![Terraforming Aro](docs/assets/VariablesSetting.gif)
+
+ Log into Terraform Cloud => choose Organization => select Workspace => Variables
 
 8- **Install Terraform CLI**
 
 Terraform CLI is a powerful tool for managing infrastructure as code, allowing users to version control infrastructure changes, collaborate more effectively, and automate the deployment and management of infrastructure resources. Install Terraform CLI from [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform).
 
 - **Integrating Terraform Cloud and GitHub Actions**
+
 After installing Terraform CLI locally, run `terraform login` to create a token.
+
+![Terraforming Aro](docs/assets/API-Token-Creation.gif)
 
 Generated token will be used to integrate with GitHub Actions as CI/CD pipeline.
 Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN secret and copy value from previous step to here. 
+
 
 - In GitHub under Environments, create Development environment
 - Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
