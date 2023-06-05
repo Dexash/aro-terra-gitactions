@@ -1,6 +1,6 @@
 # Terraforming  Azure Red Hat OpenShift(ARO) with GitHub Actions
 
-![Terraforming Aro](/aro-terra-gitactions/assets/ARO-GitHubActions.png)
+![Terraforming Aro](docs/assets/ARO-GitHubActions.png)
 
 Deploying Azure RedHat Openshift with Terraform and Integrating with GitHub Actions
 Terraforming  Azure Red Hat OpenShift(ARO) with GitHub Actions
