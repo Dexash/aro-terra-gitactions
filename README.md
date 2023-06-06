@@ -163,8 +163,7 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 
 ![Terraforming Aro](docs/assets/Github-TF-API-Token.gif)
 
-In GitHub under Environments, create Development environment.You can have [different environments in GitHub](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) like production, staging and development.
-
+In GitHub under [Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), create Development environment.
 
 ![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
 
