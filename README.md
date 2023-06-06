@@ -32,23 +32,6 @@ If you want to learn about ARO you can get more information [here](https://www.r
 6. After reviewing PR by the team and merging to the main branch, Terraform apply will execute.
 7. Terraform will deploy Red Hat OpenShift to Azure 
 
-## Workflow
-
-For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
-
-By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
-
-The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
-
-After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
-
-We will use two workflows:
-
-- **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
-
-- **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
-Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
-After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
 
 ## Prerequisites:
 
@@ -165,10 +148,15 @@ After installing Terraform CLI locally, run `terraform login` to create a token.
 ![Terraforming Aro](docs/assets/API-Token-Creation.gif)
 
 Generated token will be used to integrate with GitHub Actions as CI/CD pipeline.
+
 Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN secret and copy value from previous step to here. 
 
+![Terraforming Aro](docs/assets/Github-TF-API-Token.gif)
 
 - In GitHub under Environments, create Development environment
+
+![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
+
 - Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
 
 
@@ -180,13 +168,38 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 - In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
 
 domain
+
 location
+
 resource_group_name
+
 resource_prefix
+
 virtual_network_address_space
+
 master_subnet_address_space
+
 worker_subnet_address_space
 
+![Terraforming Aro](docs/assets/Set-Tfvars.gif)
+
+## Workflow
+
+For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
+
+By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
+
+The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
+
+After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
+
+We will use two workflows:
+
+- **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
+
+- **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
+Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
+After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
 
 ## Conclusion 
 
