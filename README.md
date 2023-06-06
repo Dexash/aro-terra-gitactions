@@ -2,8 +2,6 @@
 
 ![Terraforming Aro](docs/assets/ARO-GitHubActions.png)
 
-Deploying Azure RedHat Openshift with Terraform and Integrating with GitHub Actions
-Terraforming  Azure Red Hat OpenShift(ARO) with GitHub Actions
 
 ## Introduction
 
@@ -45,13 +43,11 @@ If you want to learn about ARO you can get more information [here](https://www.r
 
 - [Red Hat account](https://www.redhat.com/wapps/ugc/register.html?_flowId=register-flow&_flowExecutionKey=e1s1)  
 
-To enhance the readability of this blog post, references to both the command-line interface (CLI) and graphical user interface (GUI) have been provided for creating resources.
-
 ## Steps:
 
 1- **[Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)**
 
-Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform
+Azure CLI is a command-line interface for managing resources in Microsoft Azure, which is Microsoft's cloud computing platform. Install Azure CLI in your local workstation. 
 
 ![Terraforming Aro](docs/assets/Azure-CLI-installation.gif)
 
@@ -59,23 +55,30 @@ Azure CLI is a command-line interface for managing resources in Microsoft Azure,
 
 Increasing limits by VM series for ARO installation is necessary to ensure that your ARO cluster has the resources it needs to operate efficiently and reliably. 
 
-[Standard DSv3 Family vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 150  
-[Total Regional vCPUs](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests) = 200
+Standard DSv3 Family vCPUs = 150  
+Total Regional vCPUs = 200
 
 ![Terraforming Aro](docs/assets/VMsizeIncreasing.gif)
 
 3- **[Get a Red Hat pull secret](https://learn.microsoft.com/en-us/azure/openshift/tutorial-create-cluster#get-a-red-hat-pull-secret-optional)**
 
-[Navigate to your Red Hat OpenShift cluster manager portal](https://console.redhat.com/openshift/install/azure/aro-provisioned) and sign-in. Download the pull secret. We are going to use this secret in the Terraform Cloud while provisioning the ARO cluster. 
+[Navigate to your Red Hat OpenShift cluster manager portal](https://console.redhat.com/openshift/install/azure/aro-provisioned) and sign-in. 
+
+Download the pull secret. 
+
+We are going to use this secret in the Terraform Cloud while provisioning the ARO cluster. 
 
 ![Terraforming Aro](docs/assets/RedHat-PullSecret.gif)
 
 4- **Fork and Clone Github repository** 
 
 Fork the following repository in your GitHub account  and clone it in your local workstation.
+
 https://github.com/DexHat/aro-terra-gitactions
 
-After cloning in the local workstation update your .gitignore with following information.updated .gitignore file is part of repository.
+After cloning in the local workstation update your .gitignore with following information.
+
+Updated .gitignore file is part of repository.
 
 **Secrets**
 
