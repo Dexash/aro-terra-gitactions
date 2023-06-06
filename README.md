@@ -123,7 +123,7 @@ To integrate between Terraform and GitHub Actions, we are going to use [Terrafor
 
 - [Create a new workspace](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/creating#create-a-workspace) and select [API-driven](https://developer.hashicorp.com/terraform/cloud-docs/run/api) as a workflow type
 
-![Terraforming Aro](docs/assets/API-driven-workflow.gif)
+![Terraforming Aro](docs/assets/Workspace.gif)
 
 7- **Copy and set variables and secrets**
 
