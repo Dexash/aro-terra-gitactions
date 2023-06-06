@@ -78,13 +78,16 @@ https://github.com/DexHat/aro-terra-gitactions
 
 After cloning in the local workstation update your .gitignore with following information.
 
-Updated .gitignore file is part of repository.
 
-**Secrets**
+#**Secrets**
 
 pull-secret*
 
 variables_secrets*
+
+![Terraforming Aro](docs/assets/gitignore.png)
+
+
 
 5- **Run create.sh script**
 
