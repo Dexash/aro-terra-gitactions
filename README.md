@@ -93,7 +93,7 @@ variables_secrets*
 
 Run az login command to connect to Azure.
 
- `az login`
+ `az login --use-device-code`
 
 Run  create.sh file with following command:
 
@@ -124,8 +124,6 @@ To integrate between Terraform and GitHub Actions, we are going to use [Terrafor
 7- **Copy and set variables and secrets**
 
 Copy the following variables and secrets from the variables_secrets file and set them in Terraform Cloud workspace level.
-
-variables_secrets file created after running create.sh in your local workstation.
 
 **Terraform Variables:**
 
@@ -165,7 +163,8 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 
 ![Terraforming Aro](docs/assets/Github-TF-API-Token.gif)
 
-In GitHub under Environments, create Development environment
+In GitHub under Environments, create Development environment.You can have [different environments in GitHub](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) like production, staging and development.
+
 
 ![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
 
