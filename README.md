@@ -117,7 +117,9 @@ To integrate between Terraform and GitHub Actions, we are going to use [Terrafor
 
 7- **Copy and set variables and secrets**
 
-Copy the following variables and secrets from the variables_secrets file and set them in Terraform Cloud workspace level:
+Copy the following variables and secrets from the variables_secrets file and set them in Terraform Cloud workspace level.
+
+variables_secrets file created after running create.sh in your local workstation.
 
 **Terraform Variables:**
 
@@ -141,8 +143,6 @@ Since we are going to use Terraform Cloud, we will set all variables at the work
 
 ![Terraforming Aro](docs/assets/workspace_variable_settings.gif)
 
- Log into Terraform Cloud => choose Organization => select Workspace => Variables
-
 8- **Install Terraform CLI**
 
 Terraform CLI is a powerful tool for managing infrastructure as code, allowing users to version control infrastructure changes, collaborate more effectively, and automate the deployment and management of infrastructure resources. Install Terraform CLI from [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform).
@@ -159,11 +159,11 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 
 ![Terraforming Aro](docs/assets/Github-TF-API-Token.gif)
 
-- In GitHub under Environments, create Development environment
+In GitHub under Environments, create Development environment
 
 ![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
 
-- Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
+Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
 
 
 - ARM_CLIENT_ID =  Service Principal Application (client) ID
@@ -171,7 +171,7 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 - ARM_SUBSCRIPTION_ID = Azure Subscription ID
 - ARM_TENANT_ID = Azure Tenant ID 
 
-- In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
+In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
 
 domain
 
