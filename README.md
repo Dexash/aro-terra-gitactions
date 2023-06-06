@@ -177,21 +177,21 @@ Copy the following variables and secrets from variables_secrets file and set the
 - ARM_SUBSCRIPTION_ID = Azure Subscription ID
 - ARM_TENANT_ID = Azure Tenant ID 
 
-In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
+Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
 
-domain
+- domain
 
-location
+- location
 
-resource_group_name
+- resource_group_name
 
-resource_prefix
+- resource_prefix
 
-virtual_network_address_space
+- virtual_network_address_space
 
-master_subnet_address_space
+- master_subnet_address_space
 
-worker_subnet_address_space
+- worker_subnet_address_space
 
 ![Terraforming Aro](docs/assets/Set-Tfvars.gif)
 
