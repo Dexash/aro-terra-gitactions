@@ -97,6 +97,7 @@ After cloning in the local workstation update your .gitignore with following inf
 **Secrets**
 
 pull-secret*
+
 variables_secrets*
 
 5- **Run create.sh script**
