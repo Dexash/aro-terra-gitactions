@@ -101,10 +101,12 @@ Run  create.sh file with following command:
 
 it will:
 
-- Create variables-secrets file with all variables for ARO cluster
-- Register necessary service providers
-- Create service principal and assign contribute and system administrator role to it
-- Generate variables for Terraform Cloud, GitHub Actions and tfvars.
+- create variables-secrets file with all variables for ARO cluster
+- register necessary service providers
+- create service principal and assign contribute and system administrator role to it
+- generate variables for Terraform Cloud, GitHub Actions and tfvars.
+
+![Terraforming Aro](docs/assets/variables_secrets.png)
 
 6- **Terraform Cloud Sign-up** 
 
