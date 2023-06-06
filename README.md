@@ -149,7 +149,7 @@ Copy the following variables and secrets from the variables_secrets file and set
 For more information about sensitive variables in Terraform, please check [Protect Sensitive Input Variables](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables).
 Since we are going to use Terraform Cloud, we will set all variables at the workspace level.
 
-![Terraforming Aro](docs/assets/VariablesSetting.gif)
+![Terraforming Aro](docs/assets/workspace_variable_settings.gif)
 
  Log into Terraform Cloud => choose Organization => select Workspace => Variables
 
