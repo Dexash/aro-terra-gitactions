@@ -177,8 +177,7 @@ Copy the following variables and secrets from variables_secrets file and set the
 - ARM_SUBSCRIPTION_ID = Azure Subscription ID
 - ARM_TENANT_ID = Azure Tenant ID 
 
-Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
-
+Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file in your local workstation 
 - domain
 
 - location
@@ -195,6 +194,11 @@ Copy the following variables and secrets from variables_secrets file and set the
 
 ![Terraforming Aro](docs/assets/Set-Tfvars.gif)
 
+
+9- **psuh to github repository**
+
+after creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml and Terraform-Push.yml
+
 ## Workflow
 
 For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
@@ -205,6 +209,23 @@ The infrastructure team should create a new branch from main and apply changes t
 
 After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
 
+
+
+![Terraforming Aro](docs/assets/Terraform UnitTests.png)
+
+![Terraforming Aro](docs/assets/TFPlan.png)
+
+![Terraforming Aro](docs/assets/TFPush.png)
+
+![Terraforming Aro](docs/assets/TFPushCreation.png)
+
+![Terraforming Aro](docs/assets/Apply.png)
+
+![Terraforming Aro](docs/assets/AzureAroResources-1.png)
+
+![Terraforming Aro](docs/assets/AzureAroResources-2.png)
+
+
 We will use two workflows:
 
 - **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
@@ -212,6 +233,12 @@ We will use two workflows:
 - **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
 Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
 After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
+
+## Cluster Information
+
+You can get cluster information
+
+![Terraforming Aro](docs/assets/ARO-ClusterInformation.png)
 
 ## Conclusion 
 
