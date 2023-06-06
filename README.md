@@ -91,13 +91,17 @@ variables_secrets*
 
 5- **Run create.sh script**
 
+Run az login command to connect to Azure.
+
+ `az login`
+
 Run  create.sh file with following command:
 
  `sh create.sh`
 
-create.sh file will:
+it will:
 
-- Create  variables-secrets file
+- Create variables-secrets file with all variables for ARO cluster
 - Register necessary service providers
 - Create service principal and assign contribute and system administrator role to it
 - Generate variables for Terraform Cloud, GitHub Actions and tfvars.
