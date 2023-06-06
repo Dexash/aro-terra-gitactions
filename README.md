@@ -91,16 +91,22 @@ variables_secrets*
 
 5- **Run create.sh script**
 
+Run az login command to connect to Azure.
+
+ `az login --use-device-code`
+
 Run  create.sh file with following command:
 
  `sh create.sh`
 
-create.sh file will:
+it will:
 
-- Create  variables-secrets file
-- Register necessary service providers
-- Create service principal and assign contribute and system administrator role to it
-- Generate variables for Terraform Cloud, GitHub Actions and tfvars.
+- create variables-secrets file with all variables for ARO cluster
+- register necessary service providers
+- create service principal and assign contribute and system administrator role to it
+- generate variables for Terraform Cloud, GitHub Actions and tfvars.
+
+![Terraforming Aro](docs/assets/variables_secrets.png)
 
 6- **Terraform Cloud Sign-up** 
 
@@ -118,8 +124,6 @@ To integrate between Terraform and GitHub Actions, we are going to use [Terrafor
 7- **Copy and set variables and secrets**
 
 Copy the following variables and secrets from the variables_secrets file and set them in Terraform Cloud workspace level.
-
-variables_secrets file created after running create.sh in your local workstation.
 
 **Terraform Variables:**
 
@@ -159,7 +163,9 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 
 ![Terraforming Aro](docs/assets/Github-TF-API-Token.gif)
 
-In GitHub under Environments, create Development environment
+In GitHub under [Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), create Development environment.
+
+You can deploy ARO cluster with different sizing and variables under different environments like production, staging and development.
 
 ![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
 
@@ -171,21 +177,21 @@ Copy the following variables and secrets from variables_secrets file and set the
 - ARM_SUBSCRIPTION_ID = Azure Subscription ID
 - ARM_TENANT_ID = Azure Tenant ID 
 
-In your local workstation, copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
+Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
 
-domain
+- domain
 
-location
+- location
 
-resource_group_name
+- resource_group_name
 
-resource_prefix
+- resource_prefix
 
-virtual_network_address_space
+- virtual_network_address_space
 
-master_subnet_address_space
+- master_subnet_address_space
 
-worker_subnet_address_space
+- worker_subnet_address_space
 
 ![Terraforming Aro](docs/assets/Set-Tfvars.gif)
 
