@@ -165,6 +165,8 @@ Under GitHub repository - Secrets and Variables - Actions, create TF_API_TOKEN s
 
 In GitHub under [Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), create Development environment.
 
+You can deploy ARO cluster with different sizing and variables under different environments like production, staging and development.
+
 ![Terraforming Aro](docs/assets/GitHub-Development-Environment.gif)
 
 Copy the following variables and secrets from variables_secrets file and set them under GitHub repository
