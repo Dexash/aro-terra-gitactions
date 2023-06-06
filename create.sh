@@ -92,7 +92,7 @@ fi
 aroResourceProviderServicePrincipalObjectId=$(az ad sp list --display-name "Azure Red Hat OpenShift RP" --query [0].id -o tsv)
 rm -r app-service-principal.json
 
-echo "\nImportant Note: Please ensure variables_secret file is part of .gitignore file before pushing to repo" >> variables_secrets
+echo "\nImportant Note: Please ensure variables_secrets file is part of .gitignore file before pushing to repo" >> variables_secrets
 
 echo "\n## Setting Variables  ##\n" > variables_secrets
 echo "\n## following variables will be set in tfvars##\n" >> variables_secrets
