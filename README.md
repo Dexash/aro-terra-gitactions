@@ -177,8 +177,7 @@ Copy the following variables and secrets from variables_secrets file and set the
 - ARM_SUBSCRIPTION_ID = Azure Subscription ID
 - ARM_TENANT_ID = Azure Tenant ID 
 
-Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file
-
+Copy the following variables and secrets from variables_secrets file and set them in Development/tfvars file in your local workstation 
 - domain
 
 - location
@@ -194,6 +193,11 @@ Copy the following variables and secrets from variables_secrets file and set the
 - worker_subnet_address_space
 
 ![Terraforming Aro](docs/assets/Set-Tfvars.gif)
+
+
+9- **psuh to github repository**
+
+after creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml and Terraform-Push.yml
 
 ## Workflow
 
