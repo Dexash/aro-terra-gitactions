@@ -31,6 +31,25 @@ If you want to learn about ARO you can get more information [here](https://www.r
 7. Terraform will deploy Red Hat OpenShift to Azure 
 
 
+## Workflow
+
+For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
+
+By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
+
+The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
+
+After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
+
+We will use two workflows:
+
+- **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
+
+- **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
+Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
+After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
+
+
 ## Prerequisites:
 
 - [Azure Account](https://azure.microsoft.com/en-ca/free/) with active subscription
@@ -195,9 +214,11 @@ Copy the following variables and secrets from variables_secrets file and set the
 ![Terraforming Aro](docs/assets/Set-Tfvars.gif)
 
 
-9- **psuh to github repository**
+9- **psuh and merge to github repository**
 
-after creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml and Terraform-Push.yml
+After creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml.
+
+Terraform-Push.yml will be triggered when you merge to main branch. 
 
 
 ![Terraforming Aro](docs/assets/TerraformUnitTests.png)
@@ -214,24 +235,6 @@ after creating/updating Development/tfvars push it to github repository which wi
 
 ![Terraforming Aro](docs/assets/AzureAroResources-2.png)
 
-
-## Workflow
-
-For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
-
-By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
-
-The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
-
-After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
-
-We will use two workflows:
-
-- **Terraform-UnitTests.yml** : The purpose of this workflow is to run unit tests on push into any branch.  As part of this workflow’s Terraform validation, the format and security scans will be checked. 
-
-- **Terraform-Push.yml** : This workflow has two phases, one for push and one for merge. 
-Based on each push from feature/development branches to the main branch, this workflow will trigger and run the `terraform plan` command. 
-After a successful push, when a merge request is submitted this workflow will trigger the `terraform apply` command.
 
 ## Cluster Information
 
