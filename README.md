@@ -199,19 +199,8 @@ Copy the following variables and secrets from variables_secrets file and set the
 
 after creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml and Terraform-Push.yml
 
-## Workflow
 
-For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
-
-By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
-
-The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
-
-After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
-
-
-
-![Terraforming Aro](docs/assets/Terraform UnitTests.png)
+![Terraforming Aro](docs/assets/TerraformUnitTests.png)
 
 ![Terraforming Aro](docs/assets/TFPlan.png)
 
@@ -225,6 +214,16 @@ After running Terraform-UnitTests successfully, the infrastructure team can crea
 
 ![Terraforming Aro](docs/assets/AzureAroResources-2.png)
 
+
+## Workflow
+
+For maintaining code quality, preventing accidental changes, enforcing policies, collaborating more effectively and as a best practice, it’s recommended that developers not push directly to the main branch.  
+
+By using protected branches, teams can ensure that critical branches are properly managed and maintained, which can lead to a more stable and reliable codebase over time.
+
+The infrastructure team should create a new branch from main and apply changes to it, then push to feature/development branch. Pushing to branch will trigger Terraform-UnitTests.
+
+After running Terraform-UnitTests successfully, the infrastructure team can create a pull request which will trigger Terraform-Push. 
 
 We will use two workflows:
 
