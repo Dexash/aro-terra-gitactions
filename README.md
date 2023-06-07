@@ -200,7 +200,7 @@ Copy the following variables and secrets from variables_secrets file and set the
 after creating/updating Development/tfvars push it to github repository which will trigger Terraform-UnitTests.yml and Terraform-Push.yml
 
 
-![Terraforming Aro](docs/assets/Terraform UnitTests.png)
+![Terraforming Aro](docs/assets/TerraformUnitTests.png)
 
 ![Terraforming Aro](docs/assets/TFPlan.png)
 
